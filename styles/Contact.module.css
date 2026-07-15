@@ -1,0 +1,20 @@
+.section { min-height: 88vh; display: flex; flex-direction: column; justify-content: center; }
+.big {
+  font-size: clamp(2.6rem, 8vw, 7rem); font-weight: 800;
+  text-transform: uppercase; line-height: 0.98; margin: 1.2rem 0 2.6rem;
+}
+.big .stroke { display: block; color: transparent; -webkit-text-stroke: 1.5px var(--acc); }
+.mail {
+  font-size: clamp(1rem, 2vw, 1.4rem); display: inline-flex; align-items: center;
+  gap: 1rem; border-bottom: 2px solid var(--acc); padding-bottom: 0.4rem;
+  font-weight: 600; transition: 0.3s; width: max-content; max-width: 100%;
+}
+.mail:hover { color: var(--acc); letter-spacing: 0.03em; }
+.mail svg { width: 26px; height: 26px; transition: transform 0.3s; }
+.mail:hover svg { transform: translateX(8px) rotate(-30deg); }
+.footer {
+  padding: 2.2rem 6vw; border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  color: var(--mut); font-size: 0.8rem; letter-spacing: 0.08em;
+}
+.footer b { color: var(--acc); font-weight: 600; }

@@ -1,0 +1,68 @@
+/* One-viewport About: everything visible without scrolling on desktop */
+.section {
+  min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 13vh 6vw 6vh;
+}
+.title { font-size: clamp(2.1rem, 4.8vw, 3.8rem); }
+.grid { display: grid; grid-template-columns: minmax(280px, 400px) 1fr; gap: 3.5vw; align-items: center; margin-top: 1.8rem; }
+.frame { position: relative; width: 100%; }
+.frame img { width: 100%; height: auto; border-radius: 14px; filter: grayscale(20%); transition: filter 0.4s; }
+.frame:hover img { filter: grayscale(0); }
+.frame::before {
+  content: ""; position: absolute; inset: 0; border: 2px solid var(--acc);
+  border-radius: 14px; transform: translate(14px, 14px); z-index: -1; transition: transform 0.35s;
+}
+.frame:hover::before { transform: translate(7px, 7px); }
+.copy p { color: var(--mut); font-size: 1rem; line-height: 1.6; margin-bottom: 0.9rem; }
+.copy p b { color: var(--ink); font-weight: 600; }
+.edu { display: grid; gap: 0.7rem; margin-top: 1.3rem; }
+.eduCard {
+  border: 1px solid var(--line); border-radius: 12px; padding: 0.8rem 1.1rem;
+  display: flex; justify-content: space-between; gap: 1rem; align-items: baseline;
+  transition: 0.3s; background: var(--card);
+}
+.eduCard:hover { border-color: var(--acc); transform: translateX(8px); }
+.eduCard h4 { font-weight: 600; font-size: 0.95rem; }
+.eduCard small { color: var(--mut); display: block; margin-top: 0.15rem; font-size: 0.78rem; }
+.gpa { color: var(--acc); font-weight: 700; white-space: nowrap; font-size: 0.9rem; }
+.certLabel {
+  margin-top: 1.4rem; font-size: 0.92rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--acc); font-weight: 700;
+}
+.certLabel b { color: var(--mut); font-weight: 400; font-size: 0.72rem; letter-spacing: 0.14em; }
+.certs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.7rem; }
+.chip {
+  background: none; border: 1px solid rgba(224, 241, 31, 0.4); border-radius: 100px;
+  padding: 0.4rem 0.9rem; font-size: 0.74rem; letter-spacing: 0.05em;
+  color: var(--acc); font-weight: 700; transition: 0.25s;
+}
+.chip:hover { background: var(--acc); color: #000; border-color: var(--acc); transform: translateY(-3px); }
+@media (max-width: 860px) {
+  .section { min-height: auto; padding: 12vh 6vw; }
+  .grid { grid-template-columns: 1fr; }
+  .frame { max-width: 340px; margin-inline: auto; }
+}
+/* lightbox */
+.modal {
+  position: fixed; inset: 0; z-index: 900; display: grid; place-items: center;
+  padding: 4vw; visibility: hidden; opacity: 0; transition: 0.3s;
+}
+.modalOpen { visibility: visible; opacity: 1; }
+.backdrop { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.82); backdrop-filter: blur(6px); }
+.figure { position: relative; max-width: 860px; width: 100%; transform: scale(0.94); transition: 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2); }
+.modalOpen .figure { transform: scale(1); }
+.figure img {
+  border-radius: 14px; border: 2px solid var(--acc); width: 100%;
+  box-shadow: 0 30px 80px -20px rgba(224, 241, 31, 0.25);
+}
+.figure figcaption {
+  margin-top: 1rem; text-align: center; color: var(--acc);
+  font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase;
+}
+.close {
+  position: absolute; top: -18px; right: -18px; width: 42px; height: 42px;
+  border-radius: 50%; border: none; background: var(--acc); color: #000;
+  font-size: 1.1rem; font-weight: 700; transition: 0.25s;
+}
+.close:hover { transform: rotate(90deg); }

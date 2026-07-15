@@ -1,0 +1,42 @@
+.section { padding: 0; }
+.head { padding: 0 6vw; margin-bottom: 2.5vh; }
+.title { font-size: clamp(1.6rem, 3.2vw, 2.6rem); }
+.pin { overflow: hidden; position: relative; height: 100svh; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 10vh; }
+.track { display: flex; align-items: center; gap: 4vw; padding-inline: calc((100vw - min(60vw, 660px)) / 2); will-change: transform; }
+.panel {
+  flex: 0 0 auto; width: min(60vw, 660px); height: min(66vh, 620px);
+  border: 1px solid var(--line);
+  background: var(--card); border-radius: 22px; padding: 2.2rem 2.4rem 2.6rem;
+  display: grid; grid-template-rows: auto auto minmax(0, 1fr) auto; gap: 1rem;
+  position: relative; overflow: hidden; transition: border-color 0.3s;
+}
+.panel:hover { border-color: var(--acc); }
+.num {
+  font-size: 3.8rem; font-weight: 800; line-height: 1;
+  color: transparent; -webkit-text-stroke: 1.5px var(--acc); opacity: 0.85;
+}
+.panel h3 { font-size: clamp(1.4rem, 2.2vw, 2rem); font-weight: 700; text-transform: uppercase; letter-spacing: 0.01em; }
+.glyph { display: flex; align-items: center; justify-content: center; min-height: 0; }
+.glyph svg { width: min(250px, 74%); height: auto; max-height: 100%; overflow: visible; }
+.line { color: #d8d8ca; font-size: 1.02rem; font-style: italic; border-top: 1px solid var(--line); padding-top: 1.2rem; }
+.line b { color: var(--acc); font-style: normal; }
+.progress { position: absolute; left: 6vw; right: calc(6vw + 260px); bottom: 5vh; height: 2px; background: var(--line); }
+.progress i { display: block; height: 100%; width: 0; background: var(--acc); }
+.skip {
+  position: absolute; right: 6vw; bottom: calc(5vh - 16px);
+  background: #000; border: 1px solid var(--line); color: var(--mut);
+  border-radius: 100px; padding: 0.55rem 1.1rem;
+  font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase;
+  transition: 0.25s; z-index: 5; white-space: nowrap;
+}
+.skip:hover { border-color: var(--acc); color: var(--acc); transform: translateX(4px); }
+@media (max-width: 860px) {
+  .progress { right: calc(6vw + 190px); }
+  .skip { font-size: 0.66rem; padding: 0.45rem 0.85rem; }
+}
+@media (max-width: 860px) {
+  .panel { width: 82vw; height: min(62vh, 580px); padding: 1.6rem; }
+  .num { font-size: 3rem; }
+  .track { padding-inline: 10vw; }
+  .title { font-size: 1.5rem; }
+}

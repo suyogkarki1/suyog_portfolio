@@ -1,0 +1,95 @@
+:root {
+  --bg: #000000;
+  --acc: #e0f11f;
+  --ink: #f4f4ec;
+  --mut: #6e6e60;
+  --card: #0b0b08;
+  --line: #1c1c14;
+  --font: "Jost", sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+@media (min-width: 861px) { html { font-size: 17px; } }
+html { scroll-behavior: auto; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--acc); color: #000; }
+img, svg, canvas { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font-family: var(--font); cursor: pointer; }
+:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; }
+
+section { position: relative; padding: 14vh 6vw; }
+.eyebrow {
+  font-size: 0.78rem; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--acc); font-weight: 600; margin-bottom: 1rem;
+}
+.h2 {
+  font-size: clamp(2.3rem, 5.4vw, 4.6rem); font-weight: 800;
+  line-height: 1.02; text-transform: uppercase; letter-spacing: -0.01em;
+}
+.h2 .stroke { color: transparent; -webkit-text-stroke: 1.5px var(--acc); }
+
+/* shared buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 0.95rem 1.8rem; border-radius: 100px; font-weight: 600;
+  font-size: 0.92rem; letter-spacing: 0.06em; text-transform: uppercase;
+  border: 1.5px solid var(--acc); transition: 0.25s;
+  background: transparent; color: var(--ink);
+}
+.btn.solid { background: var(--acc); color: #000; }
+.btn:hover { transform: translateY(-3px); box-shadow: 0 12px 30px -8px rgba(224, 241, 31, 0.35); }
+.btn.solid:hover { background: #fff; border-color: #fff; }
+.btn:not(.solid):hover { background: var(--acc); color: #000; }
+
+/* shared social icons */
+.socials { display: flex; gap: 0.9rem; margin-top: 2.6rem; }
+.soc {
+  width: 46px; height: 46px; border: 1.5px solid var(--line); border-radius: 12px;
+  display: grid; place-items: center; transition: 0.28s; position: relative;
+}
+.soc svg { width: 20px; height: 20px; fill: var(--ink); transition: 0.28s; }
+.soc:hover {
+  border-color: var(--acc); background: var(--acc);
+  transform: translateY(-5px) rotate(-6deg);
+  box-shadow: 0 14px 30px -10px rgba(224, 241, 31, 0.45);
+}
+.soc:hover svg { fill: #000; }
+.soc::after {
+  content: attr(data-tip); position: absolute; bottom: -1.9rem; left: 50%;
+  transform: translateX(-50%) translateY(4px); font-size: 0.68rem;
+  letter-spacing: 0.08em; color: var(--acc); opacity: 0; transition: 0.25s;
+  white-space: nowrap; pointer-events: none;
+}
+.soc:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* scroll reveal initial state */
+[data-reveal] { opacity: 0; transform: translateY(34px); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  [data-reveal] { opacity: 1; transform: none; }
+}
+
+/* ---------- custom cursor ---------- */
+.cursor-dot {
+  position: fixed; top: 0; left: 0; width: 14px; height: 14px;
+  border-radius: 50%; background: var(--acc); pointer-events: none;
+  z-index: 9999; transform: translate(-50%, -50%);
+  mix-blend-mode: difference; transition: width 0.25s, height 0.25s;
+}
+@media (hover: none) { .cursor-dot { display: none; } }
+
+/* ---------- value glyph primitives (global hooks used by GSAP loops) ---------- */
+.g-acc { stroke: var(--acc); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.g-accf { fill: var(--acc); }
+.g-mut { stroke: #3c3c30; fill: none; stroke-width: 2; stroke-linecap: round; }
+.g-mutf { fill: #3c3c30; }
+.g-txt { fill: var(--acc); font-family: var(--font); font-weight: 700; }
+.g-txtm { fill: #55554a; font-family: var(--font); font-weight: 500; }

@@ -1,0 +1,53 @@
+.section { overflow: hidden; }
+.wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 4vw; align-items: center; margin-top: 3rem; min-height: 64vh; }
+.ballArea { position: relative; display: flex; flex-direction: column; align-items: center; }
+.ball { width: min(38vw, 480px); overflow: visible; }
+.patch { cursor: pointer; }
+.patch polygon { fill: #0d0d0a; stroke: var(--acc); stroke-width: 3; stroke-linejoin: round; transition: fill 0.25s; }
+.patch text { fill: var(--acc); font-family: var(--font); font-weight: 700; text-anchor: middle; pointer-events: none; transition: fill 0.25s; }
+.patch:hover polygon, .patchHot polygon { fill: var(--acc); }
+.patch:hover text, .patchHot text { fill: #000; }
+.penta polygon { fill: var(--acc); stroke: var(--acc); stroke-width: 3; stroke-linejoin: round; }
+.penta text { fill: #000; text-anchor: middle; font-family: var(--font); font-weight: 700; }
+.tip {
+  margin-top: 1.2rem; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--acc); white-space: nowrap; opacity: 0; transition: 0.25s; min-height: 1.2em;
+}
+.tipOn { opacity: 1; }
+.list { display: grid; gap: 0.9rem; }
+.item {
+  display: flex; align-items: center; gap: 1.1rem; border: 1px solid var(--line);
+  background: var(--card); border-radius: 14px; padding: 1.05rem 1.3rem;
+  transition: 0.28s; text-align: left; color: var(--ink); width: 100%;
+}
+.item .num { font-weight: 800; color: var(--acc); font-size: 1.15rem; min-width: 2ch; }
+.item h4 { font-weight: 600; font-size: 1rem; }
+.item small { display: block; color: var(--mut); font-size: 0.8rem; margin-top: 0.15rem; letter-spacing: 0.03em; }
+.item:hover { border-color: var(--acc); transform: translateX(10px); }
+.note { margin-top: 1.4rem; color: var(--mut); font-size: 0.85rem; }
+.note b { color: var(--acc); }
+@media (max-width: 900px) { .wrap { grid-template-columns: 1fr; } .ball { width: min(72vw, 380px); } }
+/* modal */
+.modal { position: fixed; inset: 0; z-index: 800; display: grid; place-items: center; padding: 5vw; visibility: hidden; opacity: 0; transition: 0.3s; }
+.modalOpen { visibility: visible; opacity: 1; }
+.backdrop { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.78); backdrop-filter: blur(6px); }
+.panel {
+  position: relative; background: var(--card); border: 1.5px solid var(--acc);
+  border-radius: 20px; max-width: 640px; width: 100%; max-height: 82vh;
+  overflow: auto; padding: 2.4rem;
+  transform: translateY(28px) scale(0.97); transition: 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+.modalOpen .panel { transform: translateY(0) scale(1); }
+.mEyebrow { color: var(--acc); font-size: 0.72rem; letter-spacing: 0.26em; text-transform: uppercase; font-weight: 600; }
+.panel h3 { font-size: 1.7rem; font-weight: 700; margin: 0.5rem 0 1rem; line-height: 1.15; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.3rem; }
+.tags span { font-size: 0.7rem; letter-spacing: 0.06em; border: 1px solid var(--line); color: var(--mut); border-radius: 100px; padding: 0.3rem 0.75rem; }
+.panel ul { list-style: none; display: grid; gap: 0.8rem; margin-bottom: 1.8rem; }
+.panel ul li { color: var(--mut); line-height: 1.6; font-size: 0.95rem; padding-left: 1.3rem; position: relative; }
+.panel ul li::before { content: "▸"; position: absolute; left: 0; color: var(--acc); }
+.close {
+  position: absolute; top: 1.1rem; right: 1.1rem; width: 38px; height: 38px;
+  border-radius: 50%; border: 1px solid var(--line); background: none;
+  color: var(--ink); font-size: 1.1rem; transition: 0.25s;
+}
+.close:hover { background: var(--acc); color: #000; border-color: var(--acc); transform: rotate(90deg); }

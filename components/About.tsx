@@ -33,14 +33,16 @@ export default function About({ onModalToggle }: { onModalToggle: (open: boolean
         <div className={styles.copy}>
           <p>
             I got into data science by being <b>wrong a lot</b> — my first
-            models looked perfect until I met data leakage. Now I&apos;m obsessed
-            with the questions most people skip: where did this data come from,
-            and is this metric lying to me?
+            models looked perfect until <b>data leakage</b> humbled me. Now I
+            chase the questions most people skip: where did this data come from,
+            and is this number lying to me? So I <b>test before I trust</b>:
+            feature engineering, clean pipelines, statistical testing,
+            cross-validation, model selection, and honest evaluation over raw
+            accuracy.
           </p>
           <p>
-            I turn messy, imbalanced, real-world datasets into things people can
-            actually use — and I enjoy the <b>unglamorous 80%</b> (cleaning,
-            validating, doubting) as much as the modelling.
+            I like the <b>unglamorous 80%</b> — cleaning, EDA, doubting — as much
+            as the modelling.
           </p>
           <div className={styles.edu}>
             <div className={styles.eduCard}>

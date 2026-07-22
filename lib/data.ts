@@ -78,17 +78,17 @@ export interface StackItem {
 }
 
 export const STACK: StackItem[] = [
-  { icon: { kind: "img", src: "/icons/py.png" }, name: "Python", pct: 90 },
+  { icon: { kind: "img", src: "/icons/py.png" }, name: "Python", pct: 75 },
   { icon: { kind: "sql" }, name: "SQL", pct: 82 },
-  { icon: { kind: "img", src: "/icons/pandas.png" }, name: "Pandas", pct: 88 },
-  { icon: { kind: "img", src: "/icons/numpy.png" }, name: "NumPy", pct: 85 },
-  { icon: { kind: "img", src: "/icons/mpl.png" }, name: "Matplotlib", pct: 82 },
-  { icon: { kind: "img", src: "/icons/sns.png" }, name: "Seaborn", pct: 80 },
-  { icon: { kind: "img", src: "/icons/skl.png" }, name: "Scikit-learn", pct: 85 },
-  { icon: { kind: "pbi" }, name: "Power BI", pct: 72 },
+  { icon: { kind: "img", src: "/icons/pandas.png" }, name: "Pandas", pct: 85 },
+  { icon: { kind: "img", src: "/icons/numpy.png" }, name: "NumPy", pct: 83 },
+  { icon: { kind: "img", src: "/icons/mpl.png" }, name: "Matplotlib", pct: 89 },
+  { icon: { kind: "img", src: "/icons/sns.png" }, name: "Seaborn", pct: 85 },
+  { icon: { kind: "img", src: "/icons/skl.png" }, name: "Scikit-learn", pct: 78 },
+  { icon: { kind: "pbi" }, name: "Power BI", pct: 60 },
   { icon: { kind: "xls" }, name: "Excel", pct: 75 },
   { icon: { kind: "img", src: "/icons/git.png" }, name: "Git & GitHub", pct: 80 },
-  { icon: { kind: "img", src: "/icons/st.png" }, name: "Streamlit", pct: 76 },
+  { icon: { kind: "img", src: "/icons/st.png" }, name: "Streamlit", pct: 20 },
   { icon: { kind: "cv" }, name: "OpenCV · YOLO · OCR", pct: 55 },
 ];
 

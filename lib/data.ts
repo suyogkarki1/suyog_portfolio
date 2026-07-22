@@ -79,7 +79,7 @@ export interface StackItem {
 
 export const STACK: StackItem[] = [
   { icon: { kind: "img", src: "/icons/py.png" }, name: "Python", pct: 75 },
-  { icon: { kind: "sql" }, name: "SQL", pct: 82 },
+  { icon: { kind: "sql" }, name: "SQL", pct: 60 },
   { icon: { kind: "img", src: "/icons/pandas.png" }, name: "Pandas", pct: 85 },
   { icon: { kind: "img", src: "/icons/numpy.png" }, name: "NumPy", pct: 83 },
   { icon: { kind: "img", src: "/icons/mpl.png" }, name: "Matplotlib", pct: 89 },

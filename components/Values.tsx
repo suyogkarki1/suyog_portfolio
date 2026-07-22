@@ -7,8 +7,11 @@ import { Glyph } from "./ValueGlyphs";
 import styles from "@/styles/Values.module.css";
 
 /**
- * 10 Values — pinned section where vertical scroll drives the track
- * horizontally. Each panel carries a looping animated glyph.
+ * 10 Values — pinned horizontal scroll on desktop, native vertical stack on
+ * mobile. Each card's glyph animation is built as its own paused timeline and
+ * only PLAYS while that card is near screen-centre, so at most one or two
+ * glyphs animate at a time instead of all ten. That keeps the section smooth
+ * even on mid-range phones while preserving the animations.
  */
 export default function Values({ goTo }: { goTo: (id: string) => void }) {
   const ref = useRef<HTMLElement>(null);
@@ -21,9 +24,8 @@ export default function Values({ goTo }: { goTo: (id: string) => void }) {
       const isMobile = window.matchMedia("(max-width: 860px)").matches;
       const getScroll = () => track.scrollWidth - window.innerWidth;
 
-      // Desktop only: pin the section and drive the track horizontally.
-      // On mobile this is far too heavy, so cards just stack and scroll
-      // natively (see the media query in Values.module.css).
+      // Desktop: pin + drive the track horizontally. Mobile: cards stack and
+      // scroll natively (media query in Values.module.css), no pin at all.
       if (!isMobile) {
         gsap.to(track, {
           x: () => -getScroll(),
@@ -42,87 +44,117 @@ export default function Values({ goTo }: { goTo: (id: string) => void }) {
         });
       }
 
-      // Skip all the looping glyph animation on mobile — it's the main
-      // source of jank on phone GPUs. Cards are still fully readable.
-      if (prefersReduced() || isMobile) return;
+      if (prefersReduced()) return;
 
+      /**
+       * Build one paused timeline per card, scoped to that card only via `q`
+       * (a scoped selector). Returns the timeline, or null if the card has no
+       * animatable glyph.
+       */
+      const buildCardTimeline = (card: HTMLElement): gsap.core.Timeline | null => {
+        const q = gsap.utils.selector(card);
+        const tl = gsap.timeline({ repeat: -1, paused: true });
+        let hasAny = false;
+        const has = (sel: string) => card.querySelector(sel) !== null;
 
-      /* ---- glyph loops: collected so they pause when the section is off-screen ---- */
-      const loops: (gsap.core.Tween | gsap.core.Timeline)[] = [];
-      let valuesActive = true;
+        // g1 — orbiting question marks
+        if (has(".orbit")) { hasAny = true; tl.to(q(".orbit"), { rotation: 360, duration: 14, ease: "none" }, 0); }
 
-      loops.push(gsap.to(".orbit", { rotation: 360, duration: 14, repeat: -1, ease: "none" }));
+        // g2 — context word swap (%, °C, YEARS…)
+        if (has(".ctx-word")) {
+          hasAny = true;
+          const el = card.querySelector<SVGTextElement>(".ctx-word")!;
+          const words = ["%", "°C", "YEARS", "RECORDS", "SAMPLES"];
+          words.forEach((w, i) => {
+            const at = i * 1.6;
+            tl.to(el, { opacity: 0, y: -8, duration: 0.25 }, at)
+              .add(() => { el.textContent = w; el.setAttribute("font-size", w.length > 2 ? "14" : "21"); })
+              .to(el, { opacity: 1, y: 0, duration: 0.25 });
+          });
+        }
 
-      const words = ["%", "°C", "YEARS", "RECORDS", "SAMPLES"];
-      let wi = 0;
-      const cycle = () => {
-        if (!valuesActive) { gsap.delayedCall(1, cycle); return; }
-        const el = ref.current?.querySelector<SVGTextElement>(".ctx-word");
-        if (!el) return;
-        wi = (wi + 1) % words.length;
-        gsap.timeline({ onComplete: () => gsap.delayedCall(1.1, cycle) })
-          .to(el, { opacity: 0, y: -8, duration: 0.25 })
-          .add(() => {
-            el.textContent = words[wi];
-            el.setAttribute("font-size", words[wi].length > 2 ? "14" : "21");
-          })
-          .to(el, { opacity: 1, y: 0, duration: 0.25 });
+        // g3 — falling drops
+        if (has(".drop")) {
+          hasAny = true;
+          q(".drop").forEach((d, i) => {
+            const mut = d.classList.contains("g-mutf");
+            tl.fromTo(d, { y: -10 }, { y: 150, duration: 1.6, ease: "power1.in", opacity: mut ? 0 : 1, repeat: -1, delay: i * 0.35 }, 0);
+          });
+        }
+
+        // g4 — gearbox + lever
+        if (has(".gearbox")) { hasAny = true; tl.to(q(".gearbox"), { opacity: 0.25, duration: 1.2, yoyo: true, repeat: -1, ease: "sine.inOut" }, 0); }
+        if (has(".lever-knob")) { hasAny = true; tl.to(q(".lever-knob"), { y: -14, duration: 1.2, yoyo: true, repeat: -1, ease: "back.inOut(2)" }, 0); }
+
+        // g5 — evidence curve + points
+        if (has(".ev-curve")) { hasAny = true; tl.to(q(".ev-curve"), { strokeDashoffset: 0, duration: 2.2, repeat: -1, repeatDelay: 1.2, ease: "power2.inOut" }, 0); }
+        if (has(".pt")) { hasAny = true; tl.to(q(".pt"), { y: -6, duration: 0.9, yoyo: true, repeat: -1, ease: "sine.inOut", stagger: 0.12 }, 0); }
+
+        // g6 — flip card
+        if (has(".flipcard")) {
+          hasAny = true;
+          tl.to(q(".flipcard"), { scaleX: 0, duration: 0.4, ease: "power2.in", delay: 1.2 })
+            .set(q(".flip-front"), { opacity: 0 }).set(q(".flip-back"), { opacity: 1 })
+            .to(q(".flipcard"), { scaleX: 1, duration: 0.4, ease: "power2.out" })
+            .to(q(".flipcard"), { scaleX: 0, duration: 0.4, ease: "power2.in", delay: 1.6 })
+            .set(q(".flip-front"), { opacity: 1 }).set(q(".flip-back"), { opacity: 0 })
+            .to(q(".flipcard"), { scaleX: 1, duration: 0.4, ease: "power2.out" });
+        }
+
+        // g7 — route
+        if (has(".route")) { hasAny = true; tl.to(q(".route"), { strokeDashoffset: 0, duration: 2.4, repeat: -1, repeatDelay: 1, ease: "power1.inOut" }, 0); }
+
+        // g8 — inner gear + doors
+        if (has(".inner-gear")) { hasAny = true; tl.to(q(".inner-gear"), { rotation: 360, duration: 5, repeat: -1, ease: "none" }, 0); }
+        if (has(".doorL")) {
+          hasAny = true;
+          tl.to(q(".doorL"), { x: -82, duration: 0.9, ease: "power3.inOut", delay: 0.8 })
+            .to(q(".doorR"), { x: 82, duration: 0.9, ease: "power3.inOut" }, "<")
+            .to(q(".doorL"), { x: 0, duration: 0.9, ease: "power3.inOut", delay: 1.6 })
+            .to(q(".doorR"), { x: 0, duration: 0.9, ease: "power3.inOut" }, "<");
+        }
+
+        // g9 — rows fade to people
+        if (has(".rows9")) {
+          hasAny = true;
+          tl.to(q(".rows9"), { opacity: 0.15, duration: 1.4, ease: "sine.inOut", delay: 1 })
+            .to(q(".people9"), { opacity: 1, duration: 1.4, ease: "sine.inOut" }, "<.3")
+            .to(q(".people9"), { opacity: 0, duration: 1.2, delay: 1.6 })
+            .to(q(".rows9"), { opacity: 1, duration: 1.2 }, "<");
+        }
+
+        // g10 — orbiter on the infinity loop
+        const loopPath = card.querySelector<SVGPathElement>(".loop10");
+        const orb = card.querySelector<SVGCircleElement>(".orb10");
+        if (loopPath && orb) {
+          hasAny = true;
+          const L = loopPath.getTotalLength();
+          const prog = { t: 0 };
+          tl.to(prog, {
+            t: 1, duration: 6, repeat: -1, ease: "none",
+            onUpdate: () => {
+              const pt = loopPath.getPointAtLength(prog.t * L);
+              orb.setAttribute("cx", String(pt.x));
+              orb.setAttribute("cy", String(pt.y));
+            },
+          }, 0);
+        }
+
+        return hasAny ? tl : null;
       };
-      gsap.delayedCall(1.4, cycle);
 
-      gsap.utils.toArray<SVGElement>(".drop").forEach((d, i) => {
-        loops.push(gsap.fromTo(d, { y: -10 }, {
-          y: 150, duration: 1.6, repeat: -1, delay: i * 0.35, ease: "power1.in",
-          opacity: d.classList.contains("g-mutf") ? 0 : 1,
-        }));
-      });
-      loops.push(gsap.to(".gearbox", { opacity: 0.25, duration: 1.2, yoyo: true, repeat: -1, ease: "sine.inOut" }));
-      loops.push(gsap.to(".lever-knob", { y: -14, duration: 1.2, yoyo: true, repeat: -1, ease: "back.inOut(2)" }));
-      loops.push(gsap.to(".ev-curve", { strokeDashoffset: 0, duration: 2.2, repeat: -1, repeatDelay: 1.2, ease: "power2.inOut" }));
-      loops.push(gsap.to(".pt", { y: -6, duration: 0.9, yoyo: true, repeat: -1, ease: "sine.inOut", stagger: 0.12 }));
-      loops.push(gsap.timeline({ repeat: -1, repeatDelay: 1.4 })
-        .to(".flipcard", { scaleX: 0, duration: 0.4, ease: "power2.in", delay: 1.2 })
-        .set(".flip-front", { opacity: 0 }).set(".flip-back", { opacity: 1 })
-        .to(".flipcard", { scaleX: 1, duration: 0.4, ease: "power2.out" })
-        .to(".flipcard", { scaleX: 0, duration: 0.4, ease: "power2.in", delay: 1.6 })
-        .set(".flip-front", { opacity: 1 }).set(".flip-back", { opacity: 0 })
-        .to(".flipcard", { scaleX: 1, duration: 0.4, ease: "power2.out" }));
-      loops.push(gsap.to(".route", { strokeDashoffset: 0, duration: 2.4, repeat: -1, repeatDelay: 1, ease: "power1.inOut" }));
-      loops.push(gsap.to(".inner-gear", { rotation: 360, duration: 5, repeat: -1, ease: "none" }));
-      loops.push(gsap.timeline({ repeat: -1, repeatDelay: 1.2 })
-        .to(".doorL", { x: -82, duration: 0.9, ease: "power3.inOut", delay: 0.8 })
-        .to(".doorR", { x: 82, duration: 0.9, ease: "power3.inOut" }, "<")
-        .to(".doorL", { x: 0, duration: 0.9, ease: "power3.inOut", delay: 1.6 })
-        .to(".doorR", { x: 0, duration: 0.9, ease: "power3.inOut" }, "<"));
-      loops.push(gsap.timeline({ repeat: -1, repeatDelay: 0.8 })
-        .to(".rows9", { opacity: 0.15, duration: 1.4, ease: "sine.inOut", delay: 1 })
-        .to(".people9", { opacity: 1, duration: 1.4, ease: "sine.inOut" }, "<.3")
-        .to(".people9", { opacity: 0, duration: 1.2, delay: 1.6 })
-        .to(".rows9", { opacity: 1, duration: 1.2 }, "<"));
-
-      // orbiter along the infinity loop
-      const loopPath = ref.current?.querySelector<SVGPathElement>(".loop10");
-      const orb = ref.current?.querySelector<SVGCircleElement>(".orb10");
-      if (loopPath && orb) {
-        const L = loopPath.getTotalLength();
-        const prog = { t: 0 };
-        loops.push(gsap.to(prog, {
-          t: 1, duration: 6, repeat: -1, ease: "none",
-          onUpdate: () => {
-            const pt = loopPath.getPointAtLength(prog.t * L);
-            orb.setAttribute("cx", String(pt.x));
-            orb.setAttribute("cy", String(pt.y));
-          },
-        }));
-      }
-
-      // pause every loop while the section is off-screen
-      ScrollTrigger.create({
-        trigger: ref.current, start: "top bottom", end: "bottom top",
-        onToggle: (self) => {
-          valuesActive = self.isActive;
-          loops.forEach((l) => (self.isActive ? l.play() : l.pause()));
-        },
+      // One timeline per card, each toggled by that card's own visibility.
+      const cards = gsap.utils.toArray<HTMLElement>(`.${styles.panel}`, ref.current);
+      cards.forEach((card) => {
+        const tl = buildCardTimeline(card);
+        if (!tl) return;
+        ScrollTrigger.create({
+          trigger: card,
+          start: "left right",
+          end: "right left",
+          horizontal: !isMobile,
+          onToggle: (self) => (self.isActive ? tl.play() : tl.pause(0)),
+        });
       });
     },
     { scope: ref }

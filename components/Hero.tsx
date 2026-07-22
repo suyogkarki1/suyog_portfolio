@@ -194,7 +194,7 @@ export default function Hero({ goTo }: { goTo: (id: string) => void }) {
           <span className={styles.yellow}>Karki</span>
         </h1>
         <p className={styles.sub} data-reveal>
-          I build <b>end-to-end ML pipelines</b> — turning messy, imbalanced,
+          I build <b>end-to-end ML pipelines</b> turning messy, imbalanced,
           real-world data into models. Currently hunting for a{" "}
           <b>data science / ML internship</b>.
         </p>

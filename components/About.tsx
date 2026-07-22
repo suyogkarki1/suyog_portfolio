@@ -32,7 +32,7 @@ export default function About({ onModalToggle }: { onModalToggle: (open: boolean
         </div>
         <div className={styles.copy}>
           <p>
-            I got into data science by being <b>wrong a lot</b> — my first
+            I got into data science by being <b>wrong a lot</b> my first
             models looked perfect until <b>data leakage</b> humbled me. Now I
             chase the questions most people skip: where did this data come from,
             and is this number lying to me? So I <b>test before I trust</b>:
@@ -41,7 +41,7 @@ export default function About({ onModalToggle }: { onModalToggle: (open: boolean
             accuracy.
           </p>
           <p>
-            I like the <b>unglamorous 80%</b> — cleaning, EDA, doubting — as much
+            I like the <b>unglamorous 80%</b> cleaning, EDA, doubting as much
             as the modelling.
           </p>
           <div className={styles.edu}>

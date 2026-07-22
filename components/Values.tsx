@@ -18,25 +18,34 @@ export default function Values({ goTo }: { goTo: (id: string) => void }) {
   useGSAP(
     () => {
       const track = trackRef.current!;
+      const isMobile = window.matchMedia("(max-width: 860px)").matches;
       const getScroll = () => track.scrollWidth - window.innerWidth;
 
-      gsap.to(track, {
-        x: () => -getScroll(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: "[data-pin]",
-          start: "top top",
-          end: () => "+=" + getScroll(),
-          scrub: 0.6,
-          pin: true,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            if (fillRef.current) fillRef.current.style.width = self.progress * 100 + "%";
+      // Desktop only: pin the section and drive the track horizontally.
+      // On mobile this is far too heavy, so cards just stack and scroll
+      // natively (see the media query in Values.module.css).
+      if (!isMobile) {
+        gsap.to(track, {
+          x: () => -getScroll(),
+          ease: "none",
+          scrollTrigger: {
+            trigger: "[data-pin]",
+            start: "top top",
+            end: () => "+=" + getScroll(),
+            scrub: 0.6,
+            pin: true,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              if (fillRef.current) fillRef.current.style.width = self.progress * 100 + "%";
+            },
           },
-        },
-      });
+        });
+      }
 
-      if (prefersReduced()) return;
+      // Skip all the looping glyph animation on mobile — it's the main
+      // source of jank on phone GPUs. Cards are still fully readable.
+      if (prefersReduced() || isMobile) return;
+
 
       /* ---- glyph loops: collected so they pause when the section is off-screen ---- */
       const loops: (gsap.core.Tween | gsap.core.Timeline)[] = [];

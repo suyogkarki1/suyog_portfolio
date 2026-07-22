@@ -2,7 +2,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import { gsap, ScrollTrigger, ScrollSmoother, useGSAP, prefersReduced } from "@/lib/gsapSetup";
-import Cursor from "./Cursor";
+// import Cursor from "./Cursor";
 import Nav from "./Nav";
 import Hero from "./Hero";
 import About from "./About";
@@ -95,7 +95,6 @@ export default function Site() {
 
   return (
     <div ref={scopeRef}>
-      <Cursor />
       <Nav active={active} goTo={goTo} />
       <div id="smooth-wrapper">
         <div id="smooth-content">

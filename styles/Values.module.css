@@ -35,8 +35,20 @@
   .skip { font-size: 0.66rem; padding: 0.45rem 0.85rem; }
 }
 @media (max-width: 860px) {
-  .panel { width: 82vw; height: min(62vh, 580px); padding: 1.6rem; }
+  /* unpin: section grows with content and scrolls normally */
+  .section { padding-bottom: 8vh; }
+  .pin { height: auto; padding-top: 4vh; display: block; }
+  .track {
+    flex-direction: column; align-items: stretch;
+    gap: 1.4rem; padding: 0 5vw; transform: none !important;
+  }
+  .panel { width: 100%; height: auto; min-height: 62vh; padding: 1.8rem; }
   .num { font-size: 3rem; }
-  .track { padding-inline: 10vw; }
-  .title { font-size: 1.5rem; }
+  .title { font-size: 1.5rem; margin-bottom: 2vh; }
+  .glyph { min-height: 150px; }
+  .progress { display: none; }
+  .skip {
+    position: static; margin: 2.5rem auto 0; display: block; width: fit-content;
+    bottom: auto; right: auto;
+  }
 }

@@ -26,8 +26,9 @@ export default function Values({ goTo }: { goTo: (id: string) => void }) {
 
       // Desktop: pin + drive the track horizontally. Mobile: cards stack and
       // scroll natively (media query in Values.module.css), no pin at all.
+          let trackTween: gsap.core.Tween | null = null;
       if (!isMobile) {
-        gsap.to(track, {
+        trackTween = gsap.to(track, {
           x: () => -getScroll(),
           ease: "none",
           scrollTrigger: {
@@ -144,17 +145,29 @@ export default function Values({ goTo }: { goTo: (id: string) => void }) {
       };
 
       // One timeline per card, each toggled by that card's own visibility.
-      const cards = gsap.utils.toArray<HTMLElement>(`.${styles.panel}`, ref.current);
+     const cards = gsap.utils.toArray<HTMLElement>(`.${styles.panel}`, ref.current);
       cards.forEach((card) => {
         const tl = buildCardTimeline(card);
         if (!tl) return;
-        ScrollTrigger.create({
-          trigger: card,
-          start: "left right",
-          end: "right left",
-          horizontal: !isMobile,
-          onToggle: (self) => (self.isActive ? tl.play() : tl.pause(0)),
-        });
+        if (isMobile) {
+          // Mobile: cards scroll vertically — trigger on their own box.
+          ScrollTrigger.create({
+            trigger: card,
+            start: "top 85%",
+            end: "bottom 15%",
+            onToggle: (self) => (self.isActive ? tl.play() : tl.pause(0)),
+          });
+        } else {
+          // Desktop: cards are moved by the track tween (not scrolled), so we
+          // must tie visibility to that animation via containerAnimation.
+          ScrollTrigger.create({
+            trigger: card,
+            containerAnimation: trackTween!,
+            start: "left right",
+            end: "right left",
+            onToggle: (self) => (self.isActive ? tl.play() : tl.pause(0)),
+          });
+        }
       });
     },
     { scope: ref }

@@ -178,12 +178,12 @@ export default function Values({ goTo }: { goTo: (id: string) => void }) {
       <div className={styles.pin} data-pin>
         <div className={styles.head}>
           <h2 className={`h2 ${styles.title}`}>
-            10 Values I Follow in <span className="stroke">Data Science &amp; ML</span>
+            {VALUES.length} Values I Follow in <span className="stroke">Data Science &amp; ML</span>
           </h2>
         </div>
         <div className={styles.track} ref={trackRef}>
           {VALUES.map((v, i) => (
-            <article key={v.glyph} className={styles.panel}>
+            <article key={i} className={styles.panel}>
               <div className={styles.num}>{String(i + 1).padStart(2, "0")}</div>
               <h3>{v.t}</h3>
               <div className={styles.glyph}><Glyph id={v.glyph} /></div>

@@ -1,0 +1,26 @@
+{
+  "hero": {
+    "eyebrow": "Data Science · Machine Learning",
+    "nameFirst": "Suyog",
+    "nameLast": "Karki",
+    "subtitle": "I build **end-to-end ML pipelines** turning messy, imbalanced, real-world data into models. Currently hunting for a **data science / ML internship**."
+  },
+  "about": {
+    "bio": [
+      "I got into data science by being **wrong a lot** my first models looked perfect until **data leakage** humbled me. Now I chase the questions most people skip: where did this data come from, and is this number lying to me? So I **test before I trust**: feature engineering, clean pipelines, statistical testing, cross-validation, model selection, and honest evaluation over raw accuracy.",
+      "I like the **unglamorous 80%** cleaning, EDA, doubting as much as the modelling."
+    ],
+    "education": [
+      { "degree": "BSc IT — Data Science · Kings College, Kathmandu", "affiliation": "Affiliated with Westcliff University, California · 2023 – 2027 · 4th year", "gpa": "GPA 3.54" },
+      { "degree": "+2 Science · Kathmandu Model College", "affiliation": "2020 – 2022", "gpa": "GPA 3.35" }
+    ]
+  },
+  "contact": {
+    "email": "suyogkarki2@gmail.com"
+  },
+  "footer": {
+    "name": "Suyog Karki",
+    "location": "Kathmandu, Nepal",
+    "tagline": "Trained on curiosity. **Validated on stubbornness.**"
+  }
+}

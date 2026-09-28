@@ -95,9 +95,12 @@ export default function Projects({ onModalToggle }: { onModalToggle: (open: bool
                 );
               })}
               </g>
-              {/* project hexagons */}
+              {/* project hexagons — one per project, evenly spaced around the ring */}
               {PROJECTS.map((proj, i) => {
-                const th = -54 + i * 72;
+                const n = PROJECTS.length;
+                const step = 360 / n;
+                const th = -90 + step / 2 + i * step;
+                const scale = Math.min(1.2, Math.max(0.55, step / 72));
                 const cx = Math.cos(th * D2R) * D1, cy = Math.sin(th * D2R) * D1;
                 return (
                   <g key={proj.short}
@@ -107,9 +110,9 @@ export default function Projects({ onModalToggle }: { onModalToggle: (open: bool
                     onMouseEnter={() => setTip(proj.title)}
                     onMouseLeave={() => setTip("")}
                   >
-                    <polygon points={poly(cx, cy, S, 6, th + 30)} />
-                    <text x={cx} y={cy - 4} fontSize="30">{`0${i + 1}`}</text>
-                    <text x={cx} y={cy + 20} fontSize="13" letterSpacing=".06em">{proj.short.toUpperCase()}</text>
+                    <polygon points={poly(cx, cy, S * scale, 6, th + 30)} />
+                    <text x={cx} y={cy - 4} fontSize={30 * scale}>{String(i + 1).padStart(2, "0")}</text>
+                    <text x={cx} y={cy + 20} fontSize={13 * scale} letterSpacing=".06em">{proj.short.toUpperCase()}</text>
                   </g>
                 );
               })}
@@ -131,7 +134,7 @@ export default function Projects({ onModalToggle }: { onModalToggle: (open: bool
                 onMouseEnter={() => setHot(i)}
                 onMouseLeave={() => setHot(null)}
               >
-                <span className={styles.num}>0{i + 1}</span>
+                <span className={styles.num}>{String(i + 1).padStart(2, "0")}</span>
                 <span>
                   <h4>{proj.title}</h4>
                   <small>{proj.tags.slice(0, 3).join(" · ")}</small>
@@ -152,7 +155,9 @@ export default function Projects({ onModalToggle }: { onModalToggle: (open: bool
             {p && (
               <div className={styles.panel}>
                 <button className={styles.close} aria-label="Close" onClick={() => setOpen(null)}>✕</button>
-                <p className={styles.mEyebrow}>Project 0{(open ?? 0) + 1} / 05</p>
+                <p className={styles.mEyebrow}>
+                  Project {String((open ?? 0) + 1).padStart(2, "0")} / {String(PROJECTS.length).padStart(2, "0")}
+                </p>
                 <h3>{p.title}</h3>
                 <div className={styles.tags}>{p.tags.map((t) => <span key={t}>{t}</span>)}</div>
                 <ul>{p.points.map((pt, i) => <li key={i}>{pt}</li>)}</ul>

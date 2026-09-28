@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { CERTS } from "@/lib/data";
+import { CERTS, SITE } from "@/lib/data";
+import { renderBold } from "@/lib/richText";
 import styles from "@/styles/About.module.css";
 
 export default function About({ onModalToggle }: { onModalToggle: (open: boolean) => void }) {
@@ -31,34 +32,19 @@ export default function About({ onModalToggle }: { onModalToggle: (open: boolean
           <img src="/portrait.jpg" alt="Portrait of Suyog Karki built from Rubik's cube tiles" />
         </div>
         <div className={styles.copy}>
-          <p>
-            I got into data science by being <b>wrong a lot</b> my first
-            models looked perfect until <b>data leakage</b> humbled me. Now I
-            chase the questions most people skip: where did this data come from,
-            and is this number lying to me? So I <b>test before I trust</b>:
-            feature engineering, clean pipelines, statistical testing,
-            cross-validation, model selection, and honest evaluation over raw
-            accuracy.
-          </p>
-          <p>
-            I like the <b>unglamorous 80%</b> cleaning, EDA, doubting as much
-            as the modelling.
-          </p>
+          {SITE.about.bio.map((p, i) => (
+            <p key={i}>{renderBold(p)}</p>
+          ))}
           <div className={styles.edu}>
-            <div className={styles.eduCard}>
-              <div>
-                <h4>BSc IT — Data Science · Kings College, Kathmandu</h4>
-                <small>Affiliated with Westcliff University, California · 2023 – 2027 · 4th year</small>
+            {SITE.about.education.map((ed, i) => (
+              <div className={styles.eduCard} key={i}>
+                <div>
+                  <h4>{ed.degree}</h4>
+                  <small>{ed.affiliation}</small>
+                </div>
+                <span className={styles.gpa}>{ed.gpa}</span>
               </div>
-              <span className={styles.gpa}>GPA 3.54</span>
-            </div>
-            <div className={styles.eduCard}>
-              <div>
-                <h4>+2 Science · Kathmandu Model College</h4>
-                <small>2020 – 2022</small>
-              </div>
-              <span className={styles.gpa}>GPA 3.35</span>
-            </div>
+            ))}
           </div>
           <p className={styles.certLabel}>
             Certifications <b>— click to view</b>

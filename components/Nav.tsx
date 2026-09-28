@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { VALUES } from "@/lib/data";
 import styles from "@/styles/Nav.module.css";
 
 const LINKS = [
@@ -8,7 +9,7 @@ const LINKS = [
   ["about", "About"],
   ["stack", "Tech Stack"],
   ["projects", "Projects"],
-  ["values", "10 Values"],
+  ["values", `${VALUES.length} Values`],
   ["contact", "Contact"],
 ] as const;
 

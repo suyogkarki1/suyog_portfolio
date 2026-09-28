@@ -2,6 +2,8 @@
 
 import { useRef } from "react";
 import { gsap, ScrollTrigger, useGSAP, prefersReduced } from "@/lib/gsapSetup";
+import { SITE } from "@/lib/data";
+import { renderBold } from "@/lib/richText";
 import { Socials } from "./Socials";
 import styles from "@/styles/Hero.module.css";
 
@@ -188,15 +190,13 @@ export default function Hero({ goTo }: { goTo: (id: string) => void }) {
     <section id="home" className={styles.hero} ref={heroRef}>
       <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
       <div className={styles.left}>
-        <p className="eyebrow" data-reveal>Data Science · Machine Learning</p>
+        <p className="eyebrow" data-reveal>{SITE.hero.eyebrow}</p>
         <h1 data-reveal>
-          <span>Suyog</span>
-          <span className={styles.yellow}>Karki</span>
+          <span>{SITE.hero.nameFirst}</span>
+          <span className={styles.yellow}>{SITE.hero.nameLast}</span>
         </h1>
         <p className={styles.sub} data-reveal>
-          I build <b>end-to-end ML pipelines</b> turning messy, imbalanced,
-          real-world data into models. Currently hunting for a{" "}
-          <b>data science / ML internship</b>.
+          {renderBold(SITE.hero.subtitle)}
         </p>
         <div className={styles.ctas} data-reveal>
           <button className="btn solid" onClick={() => goTo("projects")}>View Projects</button>

@@ -1,0 +1,12 @@
+[
+  { "t": "Curiosity Before Conclusions", "line": ["Better answers begin with ", "better questions", "."], "glyph": "g1" },
+  { "t": "Context Before Calculation", "line": ["Numbers do not speak clearly ", "without context", "."], "glyph": "g2" },
+  { "t": "Quality Before Quantity", "line": ["More data cannot repair ", "poor data", "."], "glyph": "g3" },
+  { "t": "Simplicity With Purpose", "line": ["Complexity should ", "earn its place", "."], "glyph": "g4" },
+  { "t": "Evidence Over Assumption", "line": ["The goal is not to be right — it is to discover ", "what is true", "."], "glyph": "g5" },
+  { "t": "Honesty Over Impressive Metrics", "line": ["One impressive number can hide ", "many failures", "."], "glyph": "g6" },
+  { "t": "Adapt Without Ego", "line": ["Keep the objective. ", "Change the route", "."], "glyph": "g7" },
+  { "t": "Explain What I Build", "line": ["Understanding should ", "travel with the prediction", "."], "glyph": "g8" },
+  { "t": "Remember the Human Behind the Data", "line": ["Data points may carry ", "real consequences", "."], "glyph": "g9" },
+  { "t": "Stay Unfinished", "line": ["There is no permanent finish line ", "in a changing world", "."], "glyph": "g10" }
+]

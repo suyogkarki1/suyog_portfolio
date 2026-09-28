@@ -1,0 +1,5 @@
+[
+  { "id": "ads", "label": "DataCamp · Associate Data Scientist", "src": "/certs/ads.jpg", "cap": "Associate Data Scientist · DataCamp · May 2026" },
+  { "id": "sql", "label": "DataCamp · SQL Associate", "src": "/certs/sql.jpg", "cap": "SQL Associate · DataCamp · June 2026" },
+  { "id": "sklearn", "label": "DataCamp · Supervised Learning with scikit-learn", "src": "/certs/sklearn.jpg", "cap": "Supervised Learning with scikit-learn · DataCamp · May 2026" }
+]

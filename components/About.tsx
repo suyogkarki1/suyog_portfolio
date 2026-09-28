@@ -30,11 +30,6 @@ export default function About({ onModalToggle }: { onModalToggle: (open: boolean
       <div className={styles.grid}>
         <div className={styles.frame}>
           <img src="/portrait.jpg" alt="Portrait of Suyog Karki built from Rubik's cube tiles" />
-          <span className={`${styles.corner} ${styles.tl}`} />
-          <span className={`${styles.corner} ${styles.tr}`} />
-          <span className={`${styles.corner} ${styles.bl}`} />
-          <span className={`${styles.corner} ${styles.br}`} />
-          <span className={styles.tag}>SUY0G<em>.99</em></span>
         </div>
         <div className={styles.copy}>
           {SITE.about.bio.map((p, i) => (

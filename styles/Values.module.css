@@ -20,19 +20,20 @@
 .glyph svg { width: min(250px, 74%); height: auto; max-height: 100%; overflow: visible; }
 .line { color: #d8d8ca; font-size: 1.02rem; font-style: italic; border-top: 1px solid var(--line); padding-top: 1.2rem; }
 .line b { color: var(--acc); font-style: normal; }
-.progress { position: absolute; left: 6vw; right: calc(6vw + 260px); bottom: 5vh; height: 2px; background: var(--line); }
+.progress { position: absolute; left: 6vw; right: calc(6vw + 320px); bottom: 5vh; height: 2px; background: var(--line); }
 .progress i { display: block; height: 100%; width: 0; background: var(--acc); }
 .skip {
-  position: absolute; right: 6vw; bottom: calc(5vh - 16px);
-  background: #000; border: 1px solid var(--line); color: var(--mut);
-  border-radius: 100px; padding: 0.55rem 1.1rem;
-  font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase;
+  position: absolute; right: 6vw; bottom: calc(5vh - 22px);
+  background: var(--acc); border: 1.5px solid var(--acc); color: #000;
+  border-radius: 100px; padding: 0.75rem 1.4rem;
+  font-size: 0.82rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  box-shadow: 0 10px 28px -8px rgba(224, 241, 31, 0.45);
   transition: 0.25s; z-index: 5; white-space: nowrap;
 }
-.skip:hover { border-color: var(--acc); color: var(--acc); transform: translateX(4px); }
+.skip:hover { background: #fff; border-color: #fff; transform: translateX(4px); }
 @media (max-width: 860px) {
-  .progress { right: calc(6vw + 190px); }
-  .skip { font-size: 0.66rem; padding: 0.45rem 0.85rem; }
+  .progress { right: calc(6vw + 240px); }
+  .skip { font-size: 0.72rem; padding: 0.6rem 1rem; }
 }
 @media (max-width: 860px) {
   /* unpin: section grows with content and scrolls normally */

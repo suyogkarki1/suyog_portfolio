@@ -105,7 +105,7 @@ export default function Site() {
             <Projects onModalToggle={onModalToggle} />
             <Values goTo={goTo} />
             <Contact />
-            <Footer />
+            <Footer goTo={goTo} />
           </main>
         </div>
       </div>

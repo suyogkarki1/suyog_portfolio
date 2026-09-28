@@ -2,7 +2,13 @@
   {
     "short": "Diabetes",
     "title": "Diabetes Risk Detection — Gradient Boosting",
-    "tags": ["Python", "Scikit-learn", "Streamlit", "Pandas", "Seaborn"],
+    "tags": [
+      "Python",
+      "Scikit-learn",
+      "Streamlit",
+      "Pandas",
+      "Seaborn"
+    ],
     "points": [
       "15,000+ patient records with a brutal 98:2 class imbalance — handled with stratified splits and sample-weighted training across five classifiers.",
       "Train-only statistics (Chi-square, Cramér’s V, Welch’s t, Cohen’s d) to kill test-set leakage; Gradient Boosting picked via cross-validated PR-AUC → 0.99 balanced accuracy.",
@@ -13,7 +19,12 @@
   {
     "short": "SkyCast",
     "title": "Kathmandu Rain Prediction — SkyCast",
-    "tags": ["Python", "Random Forest", "SARIMA", "Streamlit"],
+    "tags": [
+      "Python",
+      "Random Forest",
+      "SARIMA",
+      "Streamlit"
+    ],
     "points": [
       "10 years of Kathmandu weather (3,468 records, 14 meteorological variables) cleaned and engineered for supervised classification.",
       "Four models benchmarked with stratified 6-fold CV; Random Forest won at 84% accuracy / 0.90 ROC-AUC.",
@@ -24,7 +35,12 @@
   {
     "short": "Churn",
     "title": "Customer Churn Prediction",
-    "tags": ["Python", "Gradient Boosting", "EDA", "Feature Engineering"],
+    "tags": [
+      "Python",
+      "Gradient Boosting",
+      "EDA",
+      "Feature Engineering"
+    ],
     "points": [
       "10,000 European bank customers analysed for behavioural churn patterns across credit score, balance, and product usage.",
       "Engineered BalancePerProduct and AgeGroup features; 86.35% accuracy / 0.87 ROC-AUC after benchmarking simpler baselines.",
@@ -35,7 +51,11 @@
   {
     "short": "Health",
     "title": "Smart Healthcare & Lifestyle Prediction",
-    "tags": ["Python", "Logistic Regression", "Cross-validation"],
+    "tags": [
+      "Python",
+      "Logistic Regression",
+      "Cross-validation"
+    ],
     "points": [
       "5,000 patient records: blood pressure, cholesterol, BMI, smoking, chest pain severity.",
       "99.4% accuracy / 0.999 ROC-AUC — then validated with cross-validation to rule out leakage instead of just celebrating the number.",
@@ -46,7 +66,12 @@
   {
     "short": "ID · OCR",
     "title": "UAE ID Card Number Extraction Pipeline",
-    "tags": ["YOLOv11", "OpenCV", "Tesseract OCR", "PostgreSQL"],
+    "tags": [
+      "YOLOv11",
+      "OpenCV",
+      "Tesseract OCR",
+      "PostgreSQL"
+    ],
     "points": [
       "Custom-annotated 424 ID card images on Ultralytics HUB with the ID-number field as a dedicated detection class.",
       "Custom YOLO model hit 99.5% mAP50 and 95% recall on ID-number localisation.",

@@ -78,5 +78,18 @@
       "OpenCV + Tesseract OCR pipeline with regex cleaning, persisted to PostgreSQL with conflict-safe deduplication."
     ],
     "link": "https://github.com/suyogkarki1/object_detection.git"
+  },
+  {
+    "short": "EYE",
+    "title": "Diabetic Retinopathy Severity Grading (APTOS 2019)",
+    "tags": [
+      "Python · PyTorch · torchvision · OpenCV · Scikit-learn · Pandas · NumPy"
+    ],
+    "points": [
+      "Built a model that grades diabetic eye disease severity (0–4) on the APTOS 2019 dataset (3,662 retina images) with strong class imbalance (49% healthy vs 5% Severe).",
+      "Used transfer learning with EfficientNet-B3 and framed the task as regression (one severity score with MSE loss) instead of 5-class classification, so near-miss grades are penalised less under quadratic weighted kappa.",
+      "Reached 0.915 kappa and 80% accuracy on a held-out test set, and improved the Kaggle private score from 0.848 to 0.894 (winner: 0.936)."
+    ],
+    "link": " https://github.com/suyogkarki1/aptos-2019-blindness-detection.git"
   }
 ]

@@ -11,8 +11,16 @@
       "I like the **unglamorous 80%** cleaning, EDA, doubting as much as the modelling."
     ],
     "education": [
-      { "degree": "BSc IT — Data Science · Kings College, Kathmandu", "affiliation": "Affiliated with Westcliff University, California · 2023 – 2027 · 4th year", "gpa": "GPA 3.54" },
-      { "degree": "+2 Science · Kathmandu Model College", "affiliation": "2020 – 2022", "gpa": "GPA 3.35" }
+      {
+        "degree": "BSc IT — Data Science · Kings College, Kathmandu",
+        "affiliation": "Affiliated with Westcliff University, California · 2023 – 2027 · 4th year",
+        "gpa": "GPA 3.65"
+      },
+      {
+        "degree": "+2 Science · Kathmandu Model College",
+        "affiliation": "2020 – 2022",
+        "gpa": "GPA 3.35"
+      }
     ]
   },
   "contact": {

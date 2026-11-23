@@ -100,11 +100,8 @@
     ],
     "points": [
       "Built a keyboard that predicts my next word using transfer learning. I first trained an LSTM on general English from WikiText-2 (1.9M words), then fine-tuned it on ~100 of my own sentences (CV, projects and an \"about me\") so it learned how I write.",
-      "",
       "Tested it with 5-fold cross-validation against a bigram model, an LSTM trained only on my text and the pretrained model without fine-tuning. My model beat all three, nearly doubled top-3 accuracy (15.5% to 29.4%) and knew 90% of test words versus 73%.",
-      "",
       "Deployed it with Streamlit as an iPhone-style keyboard that shows word suggestions as you type and finishes your sentences in a chat.",
-      "",
       " https://suyogkarki1-lstm-next-word-prediction-streamlit-app-idno39.streamlit.app/"
     ],
     "link": "github.com/suyogkarki1/lstm-next-word-prediction"

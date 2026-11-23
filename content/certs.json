@@ -1,5 +1,26 @@
 [
-  { "id": "ads", "label": "DataCamp · Associate Data Scientist", "src": "/certs/ads.jpg", "cap": "Associate Data Scientist · DataCamp · May 2026" },
-  { "id": "sql", "label": "DataCamp · SQL Associate", "src": "/certs/sql.jpg", "cap": "SQL Associate · DataCamp · June 2026" },
-  { "id": "sklearn", "label": "DataCamp · Supervised Learning with scikit-learn", "src": "/certs/sklearn.jpg", "cap": "Supervised Learning with scikit-learn · DataCamp · May 2026" }
+  {
+    "id": "ads",
+    "label": "DataCamp · Associate Data Scientist",
+    "src": "/certs/ads.jpg",
+    "cap": "Associate Data Scientist · DataCamp · May 2026"
+  },
+  {
+    "id": "sql",
+    "label": "DataCamp · SQL Associate",
+    "src": "/certs/sql.jpg",
+    "cap": "SQL Associate · DataCamp · June 2026"
+  },
+  {
+    "id": "sklearn",
+    "label": "DataCamp · Supervised Learning with scikit-learn",
+    "src": "/certs/sklearn.jpg",
+    "cap": "Supervised Learning with scikit-learn · DataCamp · May 2026"
+  },
+  {
+    "id": "cert-1795409623188",
+    "label": "Udemy · Natural Language Processing in Python ",
+    "src": "/certs/Screenshot_2026-11-23_104351.png",
+    "cap": "Natural Language Processing in Python | Udemy | 2026"
+  }
 ]
